@@ -1,24 +1,29 @@
-// The Best Website 
 import React, { useState } from 'react';
 import './App.css';
-// I cant rememeber if this is what I'm meant to do here 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 function App() {
   const [major, setMajor] = useState('');
-  const [timeWindow, setTimeWindow] = useState('');
+  const [startDate, setStartDate] = useState(null); // Start of the range
+  const [endDate, setEndDate] = useState(null);     // End of the range
   const [events, setEvents] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Mockup event filtering logic - hopefully here is where the web scraping will be used 
+    // Fetch events from your backend (dummy data here)
     const mockEvents = [
-      { title: "Data Science Seminar", time: "2:00 PM", major: "Data Science" },
-      { title: "Entrepreneurship Talk", time: "4:00 PM", major: "Business" },
-      { title: "Chemistry Lab Workshop", time: "11:00 AM", major: "Chemistry" }
+      { title: "Data Science Seminar", time: "2:00 PM", major: "Data Science", date: new Date("2024-10-20") },
+      { title: "Entrepreneurship Talk", time: "4:00 PM", major: "Business", date: new Date("2024-10-21") },
+      { title: "Chemistry Lab Workshop", time: "11:00 AM", major: "Chemistry", date: new Date("2024-10-22") }
     ];
 
+    // Filter events by major and date range
     const filteredEvents = mockEvents.filter(event => 
-      event.major.toLowerCase() === major.toLowerCase() && event.time.includes(timeWindow)
+      event.major.toLowerCase() === major.toLowerCase() &&
+      event.date >= startDate &&
+      event.date <= endDate
     );
 
     setEvents(filteredEvents.length ? filteredEvents : [{ title: "No events found" }]);
@@ -45,12 +50,22 @@ function App() {
 
           <div className="form-group">
             <label htmlFor="timeWindow">Choose Time Window:</label>
-            <input 
-              type="text" 
-              id="timeWindow" 
-              placeholder="Choose your start date/time! " 
-              value={timeWindow}
-              onChange={(e) => setTimeWindow(e.target.value)} 
+            <DatePicker
+              selected={startDate}
+              onChange={(dates) => {
+                const [start, end] = dates;
+                setStartDate(start);
+                setEndDate(end);
+              }}
+              startDate={startDate}
+              endDate={endDate}
+              selectsRange
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+              placeholderText="Select a date range"
+              className="time-window-input"
+              dateFormat="MMMM d, yyyy" // Example: October 19, 2024
             />
           </div>
 
@@ -78,6 +93,5 @@ function App() {
     </div>
   );
 }
-// random image don't trip 
-// one image at the bottom, two on the sides - ideally 
+
 export default App;

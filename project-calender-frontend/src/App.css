@@ -1,5 +1,6 @@
 /* App.css */
 
+
 /* UVA colors */
 :root {
   --uva-blue: #232d4b; /* Dark blue */
@@ -118,7 +119,14 @@ footer {
 }
 
 #timeWindow {
-  width: 98%;  /* Adjust this value to control the width */
+  width: 97.5%;  /* Adjust this value to control the width */
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--uva-blue);
+}
+
+.time-window-input {
+  width: 550%;
   padding: 10px;
   border-radius: 4px;
   border: 1px solid var(--uva-blue);
