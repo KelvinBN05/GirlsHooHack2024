@@ -39,6 +39,7 @@ header h1 {
 }
 
 .input-section {
+  width:95%;
   margin-bottom: 30px;
   background-color: var(--uva-white);
   padding: 20px;
@@ -114,4 +115,11 @@ footer {
   height: auto;
   border-radius: 8px;
   margin-top: 10px;
+}
+
+#timeWindow {
+  width: 98%;  /* Adjust this value to control the width */
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--uva-blue);
 }
